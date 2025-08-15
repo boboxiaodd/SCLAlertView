@@ -1077,6 +1077,10 @@ SCLTimerDisplay *buttonTimer;
 {
     [self showTitle:vc image:nil color:nil title:title subTitle:subTitle duration:duration completeText:closeButtonTitle style:SCLAlertViewStyleQuestion];
 }
+- (void)showQuestion:(NSString *)title subTitle:(NSString *)subTitle closeButtonTitle:(NSString *)closeButtonTitle duration:(NSTimeInterval)duration style:(SCLAlertViewStyle) style
+{
+    [self showTitle:nil image:nil color:nil title:title subTitle:subTitle duration:duration completeText:closeButtonTitle style:style];
+}
 
 
 #pragma mark - Show using new window
