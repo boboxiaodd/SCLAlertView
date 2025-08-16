@@ -97,6 +97,7 @@ typedef NS_ENUM(NSInteger, SCLActionType)
  *
  */
 - (instancetype)initWithWindowWidth:(CGFloat)windowWidth;
+- (instancetype)initWithWindowWidth:(CGFloat)windowWidth height:(CGFloat)height;
 
 /** Adjust width of the button according to the width of the alert and
  * the number of buttons. Only used when buttons are horizontally aligned.
@@ -105,5 +106,7 @@ typedef NS_ENUM(NSInteger, SCLActionType)
  * @param numberOfButtons The number of buttons in the alert.
  */
 - (void)adjustWidthWithWindowWidth:(CGFloat)windowWidth numberOfButtons:(NSUInteger)numberOfButtons;
+
+@property (nonatomic) CGFloat min_height;
 
 @end
