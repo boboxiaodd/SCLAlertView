@@ -25,6 +25,7 @@
 #define PREDICTION_BAR_HEIGHT 40
 #define ADD_BUTTON_PADDING 10.0f
 #define DEFAULT_WINDOW_WIDTH 240
+#define MIN_HEIGHT 35.0f
 
 @interface SCLAlertView ()  <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
@@ -668,11 +669,14 @@ SCLTimerDisplay *buttonTimer;
 }
 
 #pragma mark - Buttons
-
 - (SCLButton *)addButton:(NSString *)title
 {
+    return [self addButton:title withHeight:MIN_HEIGHT];
+}
+- (SCLButton *)addButton:(NSString *)title withHeight:(CGFloat)height
+{
     // Add button
-    SCLButton *btn = [[SCLButton alloc] initWithWindowWidth:self.windowWidth];
+    SCLButton *btn = [[SCLButton alloc] initWithWindowWidth:self.windowWidth height:height];
     btn.layer.masksToBounds = YES;
     [btn setTitle:title forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont fontWithName:_buttonsFontFamily size:_buttonsFontSize];
@@ -711,10 +715,13 @@ SCLTimerDisplay *buttonTimer;
     
     return btn;
 }
-
 - (SCLButton *)addButton:(NSString *)title actionBlock:(SCLActionBlock)action
 {
-    SCLButton *btn = [self addButton:title];
+    return [self addButton:title actionBlock:action withHeight:MIN_HEIGHT];
+}
+- (SCLButton *)addButton:(NSString *)title actionBlock:(SCLActionBlock)action withHeight:(CGFloat)height
+{
+    SCLButton *btn = [self addButton:title withHeight:height];
     
     if (_buttonFormatBlock != nil)
     {
