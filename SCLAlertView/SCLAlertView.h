@@ -343,6 +343,7 @@ typedef NS_ENUM(NSInteger, SCLAlertViewBackground)
  * @param action A block of code to be executed when the button is pressed.
  */
 - (SCLButton *)addButton:(NSString *)title actionBlock:(SCLActionBlock)action;
+- (SCLButton *)addButton:(NSString *)title actionBlock:(SCLActionBlock)action withHeight:(CGFloat)height;
 
 /** Add a Button with a title, a block to handle validation, and a block to handle when the button is pressed and validation succeeds.
  *
