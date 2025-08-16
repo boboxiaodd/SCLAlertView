@@ -11,7 +11,6 @@
 
 #define MARGIN_BUTTON 12.0f
 #define DEFAULT_WINDOW_WIDTH 240
-#define MIN_HEIGHT 35.0f
 
 @implementation SCLButton
 
@@ -21,6 +20,17 @@
     if (self)
     {
         [self setupWithWindowWidth:DEFAULT_WINDOW_WIDTH];
+    }
+    return self;
+}
+
+- (instancetype)initWithWindowWidth:(CGFloat)windowWidth height:(CGFloat)height
+{
+    self = [super init];
+    if (self)
+    {
+        self.min_height = height;
+        [self setupWithWindowWidth:windowWidth];
     }
     return self;
 }
@@ -55,20 +65,20 @@
     return self;
 }
 
+
 - (void)setupWithWindowWidth:(CGFloat)windowWidth
 {
-    self.frame = CGRectMake(0.0f, 0.0f, windowWidth - (MARGIN_BUTTON * 2), MIN_HEIGHT);
+    self.frame = CGRectMake(0.0f, 0.0f, windowWidth - (MARGIN_BUTTON * 2), self.min_height);
     self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.layer.cornerRadius = 3.0f;
 }
-
 - (void)adjustWidthWithWindowWidth:(CGFloat)windowWidth numberOfButtons:(NSUInteger)numberOfButtons
 {
     CGFloat allButtonsWidth = windowWidth - (MARGIN_BUTTON * 2);
     CGFloat buttonWidth = (allButtonsWidth - ((numberOfButtons - 1) * 10)) / numberOfButtons;
     
-    self.frame = CGRectMake(0.0f, 0.0f, buttonWidth, MIN_HEIGHT);
+    self.frame = CGRectMake(0.0f, 0.0f, buttonWidth, self.min_height);
 }
 
 - (void)setTitle:(NSString *)title forState:(UIControlState)state
@@ -83,7 +93,7 @@
     [self layoutIfNeeded];
     
     // Get height needed to display title label completely
-    CGFloat buttonHeight = MAX(self.titleLabel.frame.size.height, MIN_HEIGHT);
+    CGFloat buttonHeight = MAX(self.titleLabel.frame.size.height, self.min_height);
     
     // Update button frame
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, buttonHeight);
